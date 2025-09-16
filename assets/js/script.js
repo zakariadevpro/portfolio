@@ -137,6 +137,10 @@ for (let i = 0; i < navigationLinks.length; i++) {
         if (pages[j].dataset.page === "experience") {
           animateExperienceItems()
         }
+
+        if (pages[j].dataset.page === "portfolio") {
+          // Trigger portfolio animations if needed
+        }
       } else {
         pages[j].classList.remove("active")
         navigationLinks[j].classList.remove("active")
@@ -274,6 +278,76 @@ function resetSkillAnimations() {
     })
   })
 }
+
+// Portfolio modal functionality
+// Portfolio modal variables
+const portfolioItems = document.querySelectorAll("[data-portfolio-item]")
+const portfolioModalContainer = document.querySelector("[data-portfolio-modal-container]")
+const portfolioModalCloseBtn = document.querySelector("[data-portfolio-modal-close-btn]")
+const portfolioOverlay = document.querySelector("[data-portfolio-overlay]")
+
+// Portfolio modal elements
+const portfolioModalTitle = document.querySelector("[data-portfolio-modal-title]")
+const portfolioModalCategory = document.querySelector("[data-portfolio-modal-category]")
+const portfolioModalDescription = document.querySelector("[data-portfolio-modal-description]")
+const portfolioVideoElement = document.querySelector("[data-portfolio-video-element]")
+const portfolioVideoSource = document.querySelector("[data-portfolio-video-source]")
+
+// Portfolio modal toggle function
+const portfolioModalFunc = () => {
+  portfolioModalContainer.classList.toggle("active")
+  portfolioOverlay.classList.toggle("active")
+
+  if (portfolioModalContainer.classList.contains("active")) {
+    document.body.style.overflow = "hidden"
+  } else {
+    document.body.style.overflow = ""
+  }
+}
+
+// Add click event to all portfolio items
+for (let i = 0; i < portfolioItems.length; i++) {
+  portfolioItems[i].addEventListener("click", function (e) {
+    e.preventDefault()
+
+    const title = this.getAttribute("data-project-title")
+    const category = this.getAttribute("data-project-category")
+    const description = this.getAttribute("data-project-description")
+    const videoUrl = this.getAttribute("data-project-video") // Path to your local video file
+
+    portfolioModalTitle.textContent = title
+    portfolioModalCategory.textContent = category
+    portfolioModalDescription.textContent = description
+
+    portfolioVideoSource.src = videoUrl
+    portfolioVideoElement.load() // Reload the video element with new source
+
+    portfolioModalFunc()
+  })
+}
+
+// Add click event to portfolio modal close button
+portfolioModalCloseBtn.addEventListener("click", () => {
+  portfolioModalFunc()
+  portfolioVideoElement.pause()
+  portfolioVideoElement.currentTime = 0
+})
+
+// Add click event to portfolio overlay
+portfolioOverlay.addEventListener("click", () => {
+  portfolioModalFunc()
+  portfolioVideoElement.pause()
+  portfolioVideoElement.currentTime = 0
+})
+
+// Close modal with Escape key
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && portfolioModalContainer.classList.contains("active")) {
+    portfolioModalFunc()
+    portfolioVideoElement.pause()
+    portfolioVideoElement.currentTime = 0
+  }
+})
 
 document.addEventListener("DOMContentLoaded", () => {
   const skillItems = document.querySelectorAll(".clients-item")

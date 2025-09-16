@@ -591,7 +591,7 @@ main {
   padding-bottom: 35px;
   overflow-x: auto;
   scroll-behavior: smooth;
-  overscroll-behavior-inline: contain;
+  overscroll-behavior: inline contain;
   scroll-snap-type: inline mandatory;
 }
 
@@ -1280,7 +1280,6 @@ main {
   #PORTFOLIO
 \*-----------------------------------*/
 
-
 .filter-list {
   display: none;
 }
@@ -1359,7 +1358,7 @@ main {
 .project-item.active {
   display: block;
   animation: scaleUp 0.25s ease forwards;
-   height: 350px;
+  height: 350px;
 }
 
 @keyframes scaleUp {
@@ -1373,7 +1372,7 @@ main {
 
 .project-item > a {
   width: 100%;
-   flex-direction: column
+  flex-direction: column;
 }
 
 .project-img {
@@ -1385,7 +1384,7 @@ main {
   border-radius: 16px;
   overflow: hidden;
   margin-bottom: 15px;
-  object-fit: cover
+  object-fit: cover;
 }
 
 .project-img::before {
@@ -1458,6 +1457,282 @@ main {
   color: var(--light-gray-70);
   font-size: var(--fs-6);
   font-weight: var(--fw-300);
+}
+
+/*-----------------------------------*\
+  #PORTFOLIO MODAL
+\*-----------------------------------*/
+
+.portfolio-modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  z-index: 30;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.portfolio-modal-container::-webkit-scrollbar {
+  display: none;
+}
+
+.portfolio-modal-container.active {
+  pointer-events: all;
+  visibility: visible;
+}
+
+.portfolio-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: hsl(0, 0%, 5%);
+  /* reduced backdrop blur from 10px to 5px */
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 1;
+  transition: var(--transition-1);
+}
+
+.portfolio-overlay.active {
+  /* reduced opacity from 0.9 to 0.7 for less background blur effect */
+  opacity: 0.7;
+  visibility: visible;
+  pointer-events: all;
+}
+
+.portfolio-modal {
+  background: var(--eerie-black-2);
+  position: relative;
+  margin: 20px;
+  /* removed border to eliminate modal outline */
+  border-radius: 20px;
+  box-shadow: var(--shadow-5);
+  transform: scale(0.8);
+  opacity: 0;
+  transition: var(--transition-1);
+  z-index: 2;
+  /* reduced modal size from 90vw to 85vw and max-width from 1200px to 1000px */
+  width: 85vw;
+  max-width: 1000px;
+  /* reduced height from 80vh to 75vh and max-height from 700px to 600px */
+  height: 75vh;
+  max-height: 600px;
+  overflow: hidden;
+}
+
+.portfolio-modal-container.active .portfolio-modal {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.portfolio-modal-close-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: var(--onyx);
+  border-radius: 12px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--white-2);
+  font-size: 20px;
+  opacity: 0.8;
+  z-index: 3;
+  transition: var(--transition-1);
+}
+
+.portfolio-modal-close-btn:hover,
+.portfolio-modal-close-btn:focus {
+  opacity: 1;
+  background: var(--orange-yellow-crayola);
+  transform: scale(1.1);
+}
+
+.portfolio-modal-close-btn ion-icon {
+  --ionicon-stroke-width: 50px;
+}
+
+.portfolio-modal-content {
+  display: flex;  
+  height: 100%;
+  overflow: hidden;
+}
+
+.portfolio-modal-video {
+  /* Changez de flex: 0 0 65% vers une largeur fixe */
+  flex: 0 0 60%;
+  background: var(--smoky-black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px; /* Ajoutez du padding */
+  max-height: 100%; /* Limitez la hauteur */
+}
+.portfolio-modal-video video {
+  width: 100%;
+  height: auto; /* Changez de height: 100% vers auto */
+  max-height: 400px; /* Ajoutez une hauteur maximale */
+  border-radius: 12px; /* Ajoutez des coins arrondis */
+  box-shadow: var(--shadow-3); /* Ajoutez une ombre */
+}
+.portfolio-modal-video iframe {
+  width: 100%;
+  height: 100%;
+  /* removed border-radius and box-shadow to make video fill entire left section */
+}
+
+.portfolio-modal-info {
+  /* changed flex from 25% to 35% for description section */
+  flex: 0 0 40%;
+  background: var(--eerie-black-1);
+  /* changed border-left color to gold */
+  border-left: 2px solid var(--orange-yellow-crayola);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 0;
+}
+
+.portfolio-modal-header {
+  padding: 30px 25px 20px;
+  border-bottom: 1px solid var(--jet);
+  flex-shrink: 0;
+}
+
+.portfolio-modal-title {
+  color: var(--white-2);
+  font-size: var(--fs-4);
+  font-weight: var(--fw-500);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.portfolio-modal-category {
+  color: var(--orange-yellow-crayola);
+  font-size: var(--fs-6);
+  font-weight: var(--fw-400);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.portfolio-modal-description {
+  flex: 1;
+  overflow-y: auto;
+  padding: 25px;
+}
+
+.portfolio-modal-description::-webkit-scrollbar {
+  width: 6px;
+}
+
+.portfolio-modal-description::-webkit-scrollbar-track {
+  background: var(--onyx);
+  border-radius: 3px;
+}
+
+.portfolio-modal-description::-webkit-scrollbar-thumb {
+  background: var(--orange-yellow-crayola);
+  border-radius: 3px;
+}
+
+.portfolio-modal-description::-webkit-scrollbar-thumb:hover {
+  background: hsl(45, 100%, 65%);
+}
+
+.portfolio-modal-description p {
+  color: var(--light-gray);
+  font-size: var(--fs-6);
+  font-weight: var(--fw-300);
+  line-height: 1.8;
+  text-align: justify;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .portfolio-modal {
+    width: 95vw;
+    height: 85vh;
+    margin: 10px;
+  }
+
+  .portfolio-modal-content {
+    flex-direction: column;
+  }
+
+  .portfolio-modal-video {
+    flex: 0 0 50%;
+    padding: 15px;
+  }
+    .portfolio-modal-video video {
+    max-height: 250px; /* Réduisez la hauteur max sur mobile */
+  }
+
+  .portfolio-modal-info {
+    flex: 0 0 50%;
+    border-left: none;
+    border-top: 1px solid var(--jet);
+  }
+
+  .portfolio-modal-header {
+    padding: 20px 20px 15px;
+  }
+
+  .portfolio-modal-description {
+    padding: 20px;
+  }
+
+  .portfolio-modal-title {
+    font-size: var(--fs-5);
+  }
+}
+
+@media (max-width: 480px) {
+  .portfolio-modal {
+    width: 98vw;
+    height: 90vh;
+    margin: 5px;
+    border-radius: 15px;
+  }
+
+  .portfolio-modal-close-btn {
+    top: 15px;
+    right: 15px;
+    width: 35px;
+    height: 35px;
+    font-size: 18px;
+  }
+
+  .portfolio-modal-video {
+    flex: 0 0 45%;
+    padding: 10px;
+  }
+  .portfolio-modal-video video {
+    max-height: 200px;
+  }
+  .portfolio-modal-header {
+    padding: 15px 15px 10px;
+  }
+
+  .portfolio-modal-description {
+    padding: 15px;
+  }
+   .portfolio-modal-info {
+    flex: 0 0 55%;
+  }
 }
 
 /*-----------------------------------*\
@@ -2687,7 +2962,6 @@ textarea.form-input::-webkit-resizer {
    * RESUME
    */
 
-
   .timeline-text {
     max-width: 700px;
   }
@@ -2732,6 +3006,5 @@ textarea.form-input::-webkit-resizer {
   .skill-icon {
     width: 40px;
     height: 40px;
-    border-radius: 10px;
   }
 }

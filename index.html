@@ -815,7 +815,7 @@
           <ul class="project-list">
 
             <li class="project-item  active" data-filter-item data-category="web development">
-              <a href="#">
+              <a href="#" data-portfolio-item data-project-title="BOOKS (web library)" data-project-category="PHP native" data-project-description="Une bibliothèque web complète développée en PHP natif permettant la gestion des livres, des utilisateurs et des emprunts. Cette application offre une interface intuitive pour cataloguer les ouvrages, gérer les membres de la bibliothèque et suivre les prêts en temps réel. Fonctionnalités principales : système d'authentification sécurisé, recherche avancée par titre/auteur/genre, gestion des stocks, historique des emprunts, notifications automatiques pour les retours, tableau de bord administrateur avec statistiques détaillées. L'architecture respecte les bonnes pratiques de développement avec une séparation claire entre la logique métier et la présentation." data-project-video="assets/videos/books-project-demo.mp4">
 
                 <figure class="project-img">
                   <div class="project-item-icon-box">
@@ -833,7 +833,7 @@
             </li>
 
             <li class="project-item  active" data-filter-item data-category="web development">
-              <a href="#">
+              <a href="#" data-portfolio-item data-project-title="Orizon" data-project-category="Web development" data-project-description="Orizon est une plateforme web moderne et responsive conçue pour offrir une expérience utilisateur exceptionnelle. Développée avec les dernières technologies web, cette application présente une architecture modulaire et évolutive. Le projet intègre un design contemporain avec des animations fluides, une navigation intuitive et une optimisation mobile-first. Fonctionnalités clés : interface utilisateur dynamique, système de gestion de contenu, intégration API REST, authentification sécurisée, tableau de bord personnalisable, système de notifications en temps réel, optimisation SEO avancée. L'application respecte les standards d'accessibilité WCAG et offre des performances optimales sur tous les appareils." data-project-video="assets\images\video du projet.mp4">
 
                 <figure class="project-img">
                   <div class="project-item-icon-box">
@@ -843,15 +843,15 @@
                   <img src="./assets/images/ChatGPT Image 15 sept. 2025, 22_42_38.png" alt="orizon" loading="lazy">
                 </figure>
 
-                <h3 class="project-title">M-automotiv inventory </h3>
+                <h3 class="project-title">Orizon</h3>
 
-                <p class="project-category">React & Laravel</p>
+                <p class="project-category">Web development</p>
 
               </a>
             </li>
 
             <li class="project-item  active" data-filter-item data-category="web design">
-              <a href="#">
+              <a href="#" data-portfolio-item data-project-title="Fundo" data-project-category="Web design" data-project-description="Fundo représente l'excellence en matière de design web moderne. Ce projet met l'accent sur l'expérience utilisateur avec une approche design-first qui privilégie l'esthétique et la fonctionnalité. L'interface présente un équilibre parfait entre minimalisme et richesse visuelle, utilisant une palette de couleurs soigneusement sélectionnée et une typographie élégante. Caractéristiques du design : layout responsive adaptatif, micro-interactions engageantes, système de grille flexible, composants réutilisables, animations CSS3 avancées, optimisation des performances visuelles, compatibilité cross-browser. Le projet démontre une maîtrise complète des principes de design UX/UI et des tendances contemporaines du web design." data-project-video="assets/videos/fundo-project-demo.mp4">
 
                 <figure class="project-img">
                   <div class="project-item-icon-box">
@@ -861,9 +861,9 @@
                   <img src="./assets/images/Design sans titre.png" alt="fundo" loading="lazy">
                 </figure>
 
-                <h3 class="project-title">H5P platforme</h3>
+                <h3 class="project-title">Fundo</h3>
 
-                <p class="project-category">Drupal & php</p>
+                <p class="project-category">Web design</p>
 
               </a>
             </li>
@@ -873,6 +873,37 @@
           </ul>
 
         </section>
+
+        <!-- Added new portfolio modal structure -->
+        <div class="portfolio-modal-container" data-portfolio-modal-container>
+          <div class="portfolio-overlay" data-portfolio-overlay></div>
+          
+          <section class="portfolio-modal">
+            <button class="portfolio-modal-close-btn" data-portfolio-modal-close-btn>
+              <ion-icon name="close-outline"></ion-icon>
+            </button>
+            
+            <div class="portfolio-modal-content">
+              <div class="portfolio-modal-video">
+                <video data-portfolio-video-element controls preload="metadata">
+                  <source data-portfolio-video-source src="/placeholder.svg" type="video/mp4">
+                  Votre navigateur ne supporte pas la lecture de vidéos.
+                </video>
+              </div>
+              
+              <div class="portfolio-modal-info">
+                <div class="portfolio-modal-header">
+                  <h3 class="portfolio-modal-title" data-portfolio-modal-title></h3>
+                  <span class="portfolio-modal-category" data-portfolio-modal-category></span>
+                </div>
+                
+                <div class="portfolio-modal-description">
+                  <p data-portfolio-modal-description></p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
 
       </article>
 
