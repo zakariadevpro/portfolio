@@ -312,12 +312,26 @@ for (let i = 0; i < portfolioItems.length; i++) {
 
     const title = this.getAttribute("data-project-title")
     const category = this.getAttribute("data-project-category")
-    const description = this.getAttribute("data-project-description")
+    
     const videoUrl = this.getAttribute("data-project-video") // Path to your local video file
 
     portfolioModalTitle.textContent = title
     portfolioModalCategory.textContent = category
-    portfolioModalDescription.textContent = description
+   // Récupérer les nouvelles données
+const description = this.getAttribute("data-project-description")
+const skills = this.getAttribute("data-project-skills")
+const startDate = this.getAttribute("data-project-start-date")
+const endDate = this.getAttribute("data-project-end-date")
+const contributors = this.getAttribute("data-project-contributors")
+const company = this.getAttribute("data-project-company")
+
+// Remplir les sections
+document.querySelector("[data-portfolio-description]").textContent = description || "Non spécifié"
+document.querySelector("[data-portfolio-skills]").textContent = skills || "Non spécifié"
+document.querySelector("[data-portfolio-start-date]").textContent = startDate || "Non spécifié"
+document.querySelector("[data-portfolio-end-date]").textContent = endDate || "Non spécifié"
+document.querySelector("[data-portfolio-contributors]").textContent = contributors || "Non spécifié"
+document.querySelector("[data-portfolio-company]").textContent = company || "Non spécifié"
 
     portfolioVideoSource.src = videoUrl
     portfolioVideoElement.load() // Reload the video element with new source
