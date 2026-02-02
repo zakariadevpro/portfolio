@@ -537,6 +537,7 @@ main {
   z-index: 1;
 }
 
+
 .service-item::before {
   content: "";
   position: absolute;
@@ -3048,4 +3049,10 @@ textarea.form-input::-webkit-resizer {
     width: 40px;
     height: 40px;
   }
+}
+/* ✅ Apply same gold gradient style ONLY for these 4 icons */
+.gradient-icon {
+  filter: brightness(0) saturate(100%)
+    invert(75%) sepia(85%) saturate(500%)
+    hue-rotate(5deg) brightness(105%) contrast(95%);
 }

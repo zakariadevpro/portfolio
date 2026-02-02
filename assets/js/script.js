@@ -112,6 +112,67 @@ for (let i = 0; i < formInputs.length; i++) {
   })
 }
 
+// Handle form submission
+const successMessage = document.querySelector("[data-success-message]")
+const errorMessage = document.querySelector("[data-error-message]")
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault()
+
+  // Hide previous messages
+  if (successMessage) successMessage.style.display = "none"
+  if (errorMessage) errorMessage.style.display = "none"
+
+  // Disable button and show loading state
+  const originalButtonContent = formBtn.innerHTML
+  formBtn.innerHTML = '<ion-icon name="hourglass-outline"></ion-icon><span>Envoi en cours...</span>'
+  formBtn.setAttribute("disabled", "")
+
+  try {
+    const formData = new FormData(form)
+    const response = await fetch(form.action, {
+      method: "POST",
+      body: formData,
+      headers: {
+        Accept: "application/json",
+      },
+    })
+
+    if (response.ok) {
+      // Success
+      if (successMessage) {
+        successMessage.style.display = "block"
+        successMessage.scrollIntoView({ behavior: "smooth", block: "nearest" })
+        setTimeout(() => {
+          successMessage.style.display = "none"
+        }, 5000)
+      }
+      form.reset()
+    } else {
+      // Error
+      if (errorMessage) {
+        errorMessage.style.display = "block"
+        errorMessage.scrollIntoView({ behavior: "smooth", block: "nearest" })
+        setTimeout(() => {
+          errorMessage.style.display = "none"
+        }, 5000)
+      }
+    }
+  } catch (error) {
+    // Network error
+    if (errorMessage) {
+      errorMessage.style.display = "block"
+      errorMessage.scrollIntoView({ behavior: "smooth", block: "nearest" })
+      setTimeout(() => {
+        errorMessage.style.display = "none"
+      }, 5000)
+    }
+  } finally {
+    // Restore button
+    formBtn.innerHTML = originalButtonContent
+  }
+})
+
 // page navigation variables
 const navigationLinks = document.querySelectorAll("[data-nav-link]")
 const pages = document.querySelectorAll("[data-page]")
